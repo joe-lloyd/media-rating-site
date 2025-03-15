@@ -1,6 +1,7 @@
-interface VideoGame {
+import Media from './Media';
+
+interface VideoGame extends Media {
   // Basic Info
-  title: string;
   developer: string;
   publisher: string;
   releaseDate: Date;
@@ -27,3 +28,5 @@ interface VideoGame {
   lastPlayedDate: Date;
   isFavorite: boolean;
 }
+
+export default VideoGame;

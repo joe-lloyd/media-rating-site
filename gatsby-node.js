@@ -7,14 +7,74 @@ exports.createSchemaCustomization = ({ actions }) => {
     type Mdx implements Node {
       frontmatter: Frontmatter
     }
+    
     type Frontmatter {
-      title: String
-      date: Date
+      id: String
       slug: String
+      author: String
+      mediaType: String
+      thumbnail: String
+      title: String
+      synopsis: String
+      releaseYear: Int
+      releaseDate: String
+      watchDate: String
+      dateFinished: String
+      lastListenedDate: String
+      lastWatchedDate: String
+      personalRating: Float
+      isFavorite: Boolean
+      
+      # Movie specific fields
+      posterUrl: String
+      director: String
+      genres: [String]
+      duration: String
+      language: String
+      country: String
+      cast: [String]
+      
+      # Album specific fields
+      coverUrl: String
+      artist: String
+      tracks: Int
+      label: String
+      favoriteTrack: String
+      
+      # TV Series specific fields
+      creator: String
+      firstAirDate: String
+      lastAirDate: String
+      network: String
+      seasons: Int
+      episodes: Int
+      status: String
+      currentSeason: Int
+      currentEpisode: Int
+      completionStatus: String
+      
+      # Video Game specific fields
+      timePlayed: String
+      studio: String
+      averageDuration: String
+      tags: [String]
+      
+      # Rating structures for different media types
+      rating: FrontmatterRating
+    }
+    
+    type FrontmatterRating {
+      imdb: String
+      metacritic: String
+      rottenTomatoes: String
+      pitchfork: String
+      albumOfTheYear: String
+      steam: String
+      ign: String
+      gamespot: String
     }
   `)
 }
-
 exports.createPages = async ({ graphql, actions, reporter }) => {
   console.log("Creating pages")
   const { createPage } = actions

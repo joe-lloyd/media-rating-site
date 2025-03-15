@@ -11,7 +11,6 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     'gatsby-plugin-postcss',
-    'gatsby-plugin-image',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
@@ -20,7 +19,8 @@ const config: GatsbyConfig = {
       },
     },
     'gatsby-plugin-mdx',
-    'gatsby-plugin-sharp',
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-source-filesystem',
@@ -43,6 +43,20 @@ const config: GatsbyConfig = {
         'path': './src/content/video-games',
       },
       __key: 'video-games',
+    }, {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        'name': 'albums',
+        'path': './src/content/albums',
+      },
+      __key: 'albums',
+    }, {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        'name': 'tv-series',
+        'path': './src/content/tv-series',
+      },
+      __key: 'tv-series',
     }],
 };
 

@@ -1,24 +1,24 @@
-import { graphql, Link } from 'gatsby';
 import React from 'react';
 import Layout from '../../components/Layout';
+import { graphql, Link } from 'gatsby';
+import RatingStars from '../../components/atoms/RatingStars';
 
 interface Props {
   data: {
     mdx: {
+      body: string;
       frontmatter: {
         id: string;
-        mediaType: string;
+        slug: string;
+        thumbnail: string;
         title: string;
-        author: string;
+        synopsis: string;
+        personalRating: number;
+        isFavorite: boolean;
         releaseDate: string;
         dateFinished: string;
-        slug: string;
-        personalRating: string;
-        thumbnail: string;
-        tags: string;
+        tags: string[];
         timePlayed: string;
-        synopsis: string;
-        isFavorite: string;
         studio: string;
         averageDuration: string;
         rating: {
@@ -29,58 +29,78 @@ interface Props {
         }
       }
     }
-  };
+  }
 }
 
-const VideoGamesDetailPage: React.FC<Props> = () => {
-    return (
-      <Layout title="video game title">
-        <div className="container mx-auto p-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Main content */}
-            <div className="md:col-span-2">
-              <img src="thumbnail" alt="title" className="w-full rounded-lg shadow-md" />
-              <h1 className="text-3xl font-bold mt-4">title</h1>
-              <p className="text-gray-600 mt-2">synopsis</p>
-              <div className="flex items-center mt-4">
-                <span className="ml-2 text-gray-600">personalRating</span>
-              </div>
-              <p className="mt-2"><strong>Release Date:</strong> releaseDate</p>
-              <p className="mt-2"><strong>Author:</strong> author</p>
-              <p className="mt-2"><strong>Studio:</strong> studio</p>
-              <p className="mt-2"><strong>Time Played:</strong> timePlayed</p>
-              <p className="mt-2"><strong>Average Duration:</strong> averageDuration</p>
-              <p className="mt-2"><strong>Rating:</strong> steam</p>
-              <p className="mt-2"><strong>Rating:</strong> metacritic</p>
-              <p className="mt-2"><strong>Rating:</strong> ign</p>
-              <p className="mt-2"><strong>Rating:</strong> gamespot</p>
-              <Link to="/video-games">Back to Video Games</Link>
+const VideoGamesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
+  data: { mdx },
+  children,
+}) => {
+  const game = mdx.frontmatter;
+
+  return (
+    <Layout title={game.title}>
+      <div className="container mx-auto p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Main content */}
+          <div className="md:col-span-2">
+            <img src={game.thumbnail} alt={game.title} className="w-full rounded-lg shadow-md" />
+            <h1 className="text-3xl font-bold mt-4">{game.title}</h1>
+            <p className="text-gray-600 mt-2">{game.synopsis}</p>
+            <div className="flex items-center mt-4">
+              <RatingStars rating={game.personalRating} />
+              <span className="ml-2 text-gray-600">({game.personalRating})</span>
+            </div>
+            <p className="mt-2"><strong>Time Played:</strong> {game.timePlayed}</p>
+            <p className="mt-2"><strong>Completed on:</strong> {game.dateFinished}</p>
+            {children}
+          </div>
+
+          {/* Sidebar */}
+          <div className="md:col-span-1">
+            <div className="bg-white dark:bg-zinc-600 p-4 rounded-lg shadow-md">
+              <h2 className="text-xl font-semibold">Ratings</h2>
+              <ul className="list-disc list-inside">
+                <li><strong>Steam:</strong> {game.rating.steam}</li>
+                <li><strong>Metacritic:</strong> {game.rating.metacritic}</li>
+                <li><strong>IGN:</strong> {game.rating.ign}</li>
+                <li><strong>GameSpot:</strong> {game.rating.gamespot}</li>
+              </ul>
+            </div>
+            <div className="bg-white dark:bg-zinc-600 p-4 rounded-lg shadow-md mt-4">
+              <h2 className="text-xl font-semibold">Details</h2>
+              <ul className="list-disc list-inside">
+                <li><strong>Release Date:</strong> {game.releaseDate}</li>
+                <li><strong>Developer:</strong> {game.studio}</li>
+                <li><strong>Average Duration:</strong> {game.averageDuration}</li>
+                <li><strong>Tags:</strong> {game.tags.join(', ')}</li>
+              </ul>
+            </div>
+            <div className="mt-4">
+              <Link to="/video-games" className="text-blue-500 hover:underline">Back to Video Games</Link>
             </div>
           </div>
         </div>
-      </Layout>
-    );
-  }
-;
-
+      </div>
+    </Layout>
+  );
+};
 
 export const query = graphql`
     query($id: String!) {
         mdx(id: { eq: $id }) {
             frontmatter {
                 id
-                mediaType
+                slug
+                thumbnail
                 title
-                author
+                synopsis
+                personalRating
+                isFavorite
                 releaseDate
                 dateFinished
-                slug
-                personalRating
-                thumbnail
                 tags
                 timePlayed
-                synopsis
-                isFavorite
                 studio
                 averageDuration
                 rating {
@@ -89,7 +109,6 @@ export const query = graphql`
                     ign
                     gamespot
                 }
-
             }
         }
     }

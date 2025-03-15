@@ -10,7 +10,6 @@ interface Media {
   releaseDate: Date;
 
   // Personal Opinion and Review
-  watchDate: Date;
   personalRating: number;
   isFavorite: boolean;
 }

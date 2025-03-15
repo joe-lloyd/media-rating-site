@@ -1,0 +1,52 @@
+import VideoGame from '../../src/types/VideoGame';
+
+const videoGames: VideoGame[] = [
+  {
+    id: '2',
+    title: 'Them and Us',
+    developer: 'Tendogames',
+    publisher: 'Tendogames',
+    thumbnail: 'https://www.metacritic.com/game/pc/them-and-us',
+    slug: 'them-and-us',
+    synopsis: 'Them and Us is a classic survival horror game with a focus on atmosphere and player immersion. Discover the truth of Alicia\'s past as she descends further into her strange, unending nightmare.',
+    releaseDate: new Date('05/19/2021'),
+    genres: ['Action', 'Adventure', 'Horror'],
+    platform: ['PC'],
+    gameModes: ['Single-player'],
+    engine: 'Unreal Engine',
+    esrbRating: 'Mature',
+    rating: {
+      metacritic: 70,
+      ign: 7,
+    },
+    personalRating: 7,
+    timePlayed: 12,
+    completionStatus: 'Completed',
+    lastPlayedDate: new Date('10/01/2021'),
+    isFavorite: false,
+  },
+  {
+    id: '3',
+    title: 'Doom Eternal',
+    developer: 'id Software',
+    publisher: 'Bethesda Softworks',
+    thumbnail: 'https://www.metacritic.com/game/pc/doom-eternal',
+    slug: 'doom-eternal',
+    synopsis: 'Hell’s armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity.',
+    releaseDate: new Date('03/20/2020'),
+    genres: ['Action', 'Shooter', 'First-Person'],
+    platform: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X/S'],
+    gameModes: ['Single-player', 'Multiplayer'],
+    engine: 'id Tech 7',
+    esrbRating: 'Mature',
+    rating: {
+      metacritic: 88,
+      ign: 9,
+    },
+    personalRating: 9.5,
+    timePlayed: 25,
+    completionStatus: 'Completed',
+    lastPlayedDate: new Date('09/15/2021'),
+    isFavorite: true,
+  }
+];
