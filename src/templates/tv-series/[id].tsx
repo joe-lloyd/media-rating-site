@@ -2,6 +2,8 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import { graphql, Link } from 'gatsby';
 import RatingStars from '../../components/atoms/RatingStars';
+import { IGatsbyImageData } from 'gatsby-plugin-image/dist/src/components/gatsby-image.browser';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 interface Props {
   data: {
@@ -10,12 +12,20 @@ interface Props {
       frontmatter: {
         id: string;
         slug: string;
-        thumbnail: string;
+        thumbnail: {
+          childImageSharp: {
+            gatsbyImageData: IGatsbyImageData;
+          }
+        };
         title: string;
         synopsis: string;
         personalRating: number;
         isFavorite: boolean;
-        posterUrl: string;
+        posterUrl: {
+          childImageSharp: {
+            gatsbyImageData: IGatsbyImageData;
+          }
+        }
         creator: string;
         firstAirDate: string;
         lastAirDate: string;
@@ -44,6 +54,7 @@ const TvSeriesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
   const series = mdx.frontmatter;
+  const image = getImage(series.posterUrl);
 
   return (
     <Layout title={series.title}>
@@ -51,7 +62,9 @@ const TvSeriesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Main content */}
           <div className="md:col-span-2">
-            <img src={series.posterUrl} alt={series.title} className="w-full rounded-lg shadow-md" />
+            {image && (
+              <GatsbyImage image={image} alt={series.title} className="w-full rounded-lg shadow-md" />
+            )}
             <h1 className="text-3xl font-bold mt-4">{series.title}</h1>
             <p className="text-gray-600 mt-2">{series.synopsis}</p>
             <div className="flex items-center mt-4">
@@ -104,12 +117,28 @@ export const query = graphql`
             frontmatter {
                 id
                 slug
-                thumbnail
+                thumbnail {
+                    childImageSharp {
+                        gatsbyImageData(
+                            width: 800
+                            placeholder: BLURRED
+                            formats: [AUTO, WEBP, AVIF]
+                        )
+                    }
+                }
                 title
                 synopsis
                 personalRating
                 isFavorite
-                posterUrl
+                posterUrl {
+                    childImageSharp {
+                        gatsbyImageData(
+                            width: 800
+                            placeholder: BLURRED
+                            formats: [AUTO, WEBP, AVIF]
+                        )
+                    }
+                }
                 creator
                 firstAirDate
                 lastAirDate

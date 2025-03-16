@@ -20,20 +20,28 @@ const VideoGamesOverviewPage: React.FC<Props> = ({ data }) => {
   return (
     <Layout title="Video Games">
       <CardList>
-        {videoGames.map((videoGame) => (<Card media={videoGame} />))}
+        {videoGames.map((videoGame) => (<Card media={videoGame} key={videoGame.id} />))}
       </CardList>
     </Layout>
   );
 };
 
 export const query = graphql`
-    query MyQuery {
+    query VideoGamesQuery {
         allMdx(filter: {frontmatter: {mediaType: {eq: "video-game"}}}) {
             nodes {
                 frontmatter {
                     id
                     slug
-                    thumbnail
+                    thumbnail {
+                        childImageSharp {
+                            gatsbyImageData(
+                                width: 400
+                                placeholder: BLURRED
+                                formats: [AUTO, WEBP, AVIF]
+                            )
+                        }
+                    }
                     synopsis
                     title
                     personalRating

@@ -2,6 +2,8 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import { graphql, Link } from 'gatsby';
 import RatingStars from '../../components/atoms/RatingStars';
+import { IGatsbyImageData } from 'gatsby-plugin-image/dist/src/components/gatsby-image.browser';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 interface Props {
   data: {
@@ -10,12 +12,20 @@ interface Props {
       frontmatter: {
         id: string;
         slug: string;
-        thumbnail: string;
+        thumbnail: {
+          childImageSharp: {
+            gatsbyImageData: IGatsbyImageData;
+          }
+        };
         title: string;
         synopsis: string;
         personalRating: number;
         isFavorite: boolean;
-        coverUrl: string;
+        coverUrl: {
+          childImageSharp: {
+            gatsbyImageData: IGatsbyImageData;
+          }
+        }
         artist: string;
         releaseYear: number;
         genres: string[];
@@ -39,6 +49,7 @@ const AlbumDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
   const album = mdx.frontmatter;
+  const image = getImage(album.coverUrl);
 
   return (
     <Layout title={album.title}>
@@ -46,7 +57,9 @@ const AlbumDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Main content */}
           <div className="md:col-span-2">
-            <img src={album.coverUrl} alt={album.title} className="w-full rounded-lg shadow-md" />
+            {image && (
+              <GatsbyImage image={image} alt={album.title} className="w-full rounded-lg shadow-md" />
+            )}
             <h1 className="text-3xl font-bold mt-4">{album.title}</h1>
             <h2 className="text-xl text-gray-700 mt-1">{album.artist}</h2>
             <p className="text-gray-600 mt-2">{album.synopsis}</p>
@@ -95,12 +108,28 @@ export const query = graphql`
             frontmatter {
                 id
                 slug
-                thumbnail
+                thumbnail {
+                    childImageSharp {
+                        gatsbyImageData(
+                            width: 800
+                            placeholder: BLURRED
+                            formats: [AUTO, WEBP, AVIF]
+                        )
+                    }
+                }
                 title
                 synopsis
                 personalRating
                 isFavorite
-                coverUrl
+                coverUrl {
+                    childImageSharp {
+                        gatsbyImageData(
+                            width: 800
+                            placeholder: BLURRED
+                            formats: [AUTO, WEBP, AVIF]
+                        )
+                    }
+                }
                 artist
                 releaseYear
                 genres

@@ -13,7 +13,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String
       author: String
       mediaType: String
-      thumbnail: String
+      thumbnail: File @fileByRelativePath
       title: String
       synopsis: String
       releaseYear: Int
@@ -26,7 +26,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       isFavorite: Boolean
       
       # Movie specific fields
-      posterUrl: String
+      posterUrl: File @fileByRelativePath
       director: String
       genres: [String]
       duration: String
@@ -35,7 +35,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       cast: [String]
       
       # Album specific fields
-      coverUrl: String
+      coverUrl: File @fileByRelativePath
       artist: String
       tracks: Int
       label: String
@@ -75,6 +75,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
   `)
 }
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   console.log("Creating pages")
   const { createPage } = actions

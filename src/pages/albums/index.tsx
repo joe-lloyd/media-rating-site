@@ -33,7 +33,15 @@ export const query = graphql`
                 frontmatter {
                     id
                     slug
-                    thumbnail
+                    thumbnail {
+                        childImageSharp {
+                            gatsbyImageData(
+                                width: 400
+                                placeholder: BLURRED
+                                formats: [AUTO, WEBP, AVIF]
+                            )
+                        }
+                    }
                     synopsis
                     title
                     personalRating

@@ -20,20 +20,28 @@ const MoviesOverviewPage: React.FC<Props> = ({ data }) => {
   return (
     <Layout title="Movies">
       <CardList>
-        {movies.map((movie) => (<Card media={movie} />))}
+        {movies.map((movie) => (<Card media={movie} key={movie.id} />))}
       </CardList>
     </Layout>
   );
 };
 
 export const query = graphql`
-    query MyQuery {
+    query MoviesQuery {
         allMdx(filter: {frontmatter: {mediaType: {eq: "movie"}}}) {
             nodes {
                 frontmatter {
                     id
                     slug
-                    thumbnail
+                    thumbnail {
+                        childImageSharp {
+                            gatsbyImageData(
+                                width: 400
+                                placeholder: BLURRED
+                                formats: [AUTO, WEBP, AVIF]
+                            )
+                        }
+                    }
                     synopsis
                     title
                     personalRating

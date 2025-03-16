@@ -1,8 +1,10 @@
+import { ImageDataLike } from 'gatsby-plugin-image/dist/src/components/hooks';
+
 interface Media {
   // site-specific data
   id: string;
   slug: string;
-  thumbnail: string;
+  thumbnail: ImageDataLike;
 
   // Basic Info
   title: string;
