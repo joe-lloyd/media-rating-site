@@ -3,22 +3,33 @@ import { Link } from 'gatsby';
 import Media from '../types/Media';
 import RatingStars from './atoms/RatingStars';
 import RatingTag from './atoms/RatingTag';
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import type {
-  IGatsbyImageData
+  IGatsbyImageData,
 } from 'gatsby-plugin-image/dist/src/components/gatsby-image.browser';
 
 const Card = ({ media }: { media: Media }) => {
-  console.log(media);
   const thumb = getImage(media.thumbnail) as IGatsbyImageData;
-  console.log(thumb);
+  const mediaPath = {
+    'album': 'albums',
+    'video-game': 'video-games',
+    'movie': 'movies',
+    'tv-series': 'tv-series',
+  }[media.mediaType];
+
+  const mediaAddedDate = new Date(parseInt(media.createdDate)).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   return (
-    <Link to={`./${media.slug}`} className="grid">
-      <div
-        className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mx-auto"
-      >
-        <GatsbyImage image={thumb} alt={`${media.thumbnail} image`} />
+    <Link
+      to={`/${mediaPath}/${media.slug}`}
+      className="grid w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mx-auto"
+    >
+      <GatsbyImage image={thumb} alt={`${media.thumbnail} image`} className="object-contain h-72" />
+      <div className="flex flex-1 content-between flex-col justify-between">
         <div className="p-5 pb-5">
           <a href="#">
             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -31,6 +42,16 @@ const Card = ({ media }: { media: Media }) => {
           </div>
           <div>
             <p>{media.synopsis}</p>
+          </div>
+        </div>
+
+        <div
+          className="flex items-center justify-between p-5 bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 rounded-b-lg"
+        >
+          <div className="flex items-center">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Date Added: {mediaAddedDate}
+            </p>
           </div>
         </div>
       </div>

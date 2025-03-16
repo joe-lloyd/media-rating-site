@@ -24,6 +24,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       lastWatchedDate: String
       personalRating: Float
       isFavorite: Boolean
+      createdDate: String
       
       # Movie specific fields
       posterUrl: File @fileByRelativePath

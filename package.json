@@ -15,7 +15,8 @@
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
     "scrape": "ts-node scrape",
-    "generate-types": "graphql-codegen --config codegen.yml"
+    "generate-types": "graphql-codegen --config codegen.yml",
+    "convert-images": "tsx src/scripts/image-compression.ts"
   },
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
@@ -33,6 +34,7 @@
     "postcss": "^8.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sharp": "^0.33.5",
     "tailwindcss": "^4.0.9"
   },
   "devDependencies": {

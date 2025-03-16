@@ -33,6 +33,7 @@ export const query = graphql`
                 frontmatter {
                     id
                     slug
+                    mediaType
                     thumbnail {
                         childImageSharp {
                             gatsbyImageData(
@@ -45,6 +46,7 @@ export const query = graphql`
                     synopsis
                     title
                     personalRating
+                    createdDate
                 }
             }
         }

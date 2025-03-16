@@ -5,6 +5,8 @@ interface Media {
   id: string;
   slug: string;
   thumbnail: ImageDataLike;
+  mediaType: string;
+  createdDate: string;
 
   // Basic Info
   title: string;
