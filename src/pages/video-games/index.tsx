@@ -18,7 +18,7 @@ interface Props {
 const VideoGamesOverviewPage: React.FC<Props> = ({ data }) => {
   const videoGames: Media[] = data.allMdx.nodes.map((node: { frontmatter : Media}) => node.frontmatter);
   return (
-    <Layout title="Video Games" image={videoGames[0].thumbnail}>
+    <Layout title="Video Games" image={videoGames[0].thumbnail} mediaType="video-game">
       <CardList>
         {videoGames.map((videoGame) => (<Card media={videoGame} key={videoGame.id} />))}
       </CardList>

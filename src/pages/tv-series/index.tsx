@@ -18,7 +18,7 @@ interface Props {
 const TvSeriesOverviewPage: React.FC<Props> = ({ data }) => {
   const tvSeries: TvSeries[] = data.allMdx.nodes.map((node: { frontmatter : TvSeries}) => node.frontmatter);
   return (
-    <Layout title="TV Series" image={tvSeries[0].thumbnail}>
+    <Layout title="TV Series" image={tvSeries[0].thumbnail} mediaType="tv-series">
       <CardList>
         {tvSeries.map((series) => (<Card media={series} key={series.id} />))}
       </CardList>

@@ -18,7 +18,7 @@ interface Props {
 const AlbumsOverviewPage: React.FC<Props> = ({ data }) => {
   const albums: Album[] = data.allMdx.nodes.map((node: { frontmatter : Album}) => node.frontmatter);
   return (
-    <Layout title="Albums" image={albums[0].thumbnail}>
+    <Layout title="Albums" image={albums[0].thumbnail} mediaType={'album'}>
       <CardList>
         {albums.map((album) => (<Card media={album} key={album.id} />))}
       </CardList>

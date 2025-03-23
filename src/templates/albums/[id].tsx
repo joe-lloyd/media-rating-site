@@ -1,9 +1,7 @@
 import React from 'react';
-import Layout from '../../components/Layout';
-import { graphql, Link } from 'gatsby';
-import RatingStars from '../../components/atoms/RatingStars';
-import { IGatsbyImageData } from 'gatsby-plugin-image/dist/src/components/gatsby-image.browser';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { graphql } from 'gatsby';
+import DetailLayout from '../../components/DetailLayout';
+import DetailSidebarBox from '../../components/DetailSidebarBox';
 
 interface Props {
   data: {
@@ -12,20 +10,12 @@ interface Props {
       frontmatter: {
         id: string;
         slug: string;
-        thumbnail: {
-          childImageSharp: {
-            gatsbyImageData: IGatsbyImageData;
-          }
-        };
+        thumbnail: any;
         title: string;
         synopsis: string;
         personalRating: number;
         isFavorite: boolean;
-        coverUrl: {
-          childImageSharp: {
-            gatsbyImageData: IGatsbyImageData;
-          }
-        }
+        coverUrl: any;
         artist: string;
         releaseYear: number;
         genres: string[];
@@ -41,7 +31,7 @@ interface Props {
         }
       }
     }
-  }
+  };
 }
 
 const AlbumDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
@@ -49,56 +39,52 @@ const AlbumDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
   const album = mdx.frontmatter;
-  const image = getImage(album.coverUrl);
+
+  // Main info component for the main section
+  const mainInfo = (
+    <>
+      <h2 className="text-xl text-gray-700 dark:text-gray-300 mt-1">{album.artist}</h2>
+      <p className="mt-2"><strong>Last Listened:</strong> {album.lastListenedDate}</p>
+      <p className="mt-2"><strong>Favorite Track:</strong> {album.favoriteTrack}</p>
+    </>
+  );
+
+  // Sidebar content
+  const sidebarContent = (
+    <>
+      <DetailSidebarBox title="Ratings">
+        <ul className="list-disc list-inside">
+          <li><strong>Pitchfork:</strong> {album.rating.pitchfork}</li>
+          <li><strong>Metacritic:</strong> {album.rating.metacritic}</li>
+          <li><strong>Album of the Year:</strong> {album.rating.albumOfTheYear}</li>
+        </ul>
+      </DetailSidebarBox>
+
+      <DetailSidebarBox title="Details">
+        <ul className="list-disc list-inside">
+          <li><strong>Release Year:</strong> {album.releaseYear}</li>
+          <li><strong>Genres:</strong> {album.genres.join(', ')}</li>
+          <li><strong>Number of Tracks:</strong> {album.tracks}</li>
+          <li><strong>Label:</strong> {album.label}</li>
+          <li><strong>Duration:</strong> {album.duration} minutes</li>
+        </ul>
+      </DetailSidebarBox>
+    </>
+  );
 
   return (
-    <Layout title={album.title} image={album.coverUrl}>
-      <div className="container mx-auto p-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Main content */}
-          <div className="md:col-span-2">
-            {image && (
-              <GatsbyImage image={image} alt={album.title} className="w-full rounded-lg shadow-md" />
-            )}
-            <h1 className="text-3xl font-bold mt-4">{album.title}</h1>
-            <h2 className="text-xl text-gray-700 mt-1">{album.artist}</h2>
-            <p className="text-gray-600 mt-2">{album.synopsis}</p>
-            <div className="flex items-center mt-4">
-              <RatingStars rating={album.personalRating} />
-              <span className="ml-2 text-gray-600">({album.personalRating})</span>
-            </div>
-            <p className="mt-2"><strong>Last Listened:</strong> {album.lastListenedDate}</p>
-            <p className="mt-2"><strong>Favorite Track:</strong> {album.favoriteTrack}</p>
-            {children}
-          </div>
-
-          {/* Sidebar */}
-          <div className="md:col-span-1">
-            <div className="bg-white dark:bg-zinc-600 p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold">Ratings</h2>
-              <ul className="list-disc list-inside">
-                <li><strong>Pitchfork:</strong> {album.rating.pitchfork}</li>
-                <li><strong>Metacritic:</strong> {album.rating.metacritic}</li>
-                <li><strong>Album of the Year:</strong> {album.rating.albumOfTheYear}</li>
-              </ul>
-            </div>
-            <div className="bg-white dark:bg-zinc-600 p-4 rounded-lg shadow-md mt-4">
-              <h2 className="text-xl font-semibold">Details</h2>
-              <ul className="list-disc list-inside">
-                <li><strong>Release Year:</strong> {album.releaseYear}</li>
-                <li><strong>Genres:</strong> {album.genres.join(', ')}</li>
-                <li><strong>Number of Tracks:</strong> {album.tracks}</li>
-                <li><strong>Label:</strong> {album.label}</li>
-                <li><strong>Duration:</strong> {album.duration} minutes</li>
-              </ul>
-            </div>
-            <div className="mt-4">
-              <Link to="/albums" className="text-blue-500 hover:underline">Back to Albums</Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
+    <DetailLayout
+      title={album.title}
+      mediaType="album"
+      image={album.coverUrl}
+      synopsis={album.synopsis}
+      personalRating={album.personalRating}
+      mainInfo={mainInfo}
+      sidebarContent={sidebarContent}
+      backLink={{ url: '/albums', text: 'Back to Albums' }}
+    >
+      {children}
+    </DetailLayout>
   );
 };
 

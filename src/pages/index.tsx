@@ -19,7 +19,7 @@ const HomePage: React.FC<Props> = ({ data }) => {
   const allMedia: Media[] = data.allMdx.nodes.map((node: { frontmatter : Media}) => node.frontmatter);
 
   return (
-    <Layout title="Home" image={allMedia[0].thumbnail}>
+    <Layout title="Home" image={allMedia[0].thumbnail} mediaType={allMedia[0].mediaType}>
       <CardList>
         {allMedia.map((media) => (<Card media={media} key={media.id} />))}
       </CardList>

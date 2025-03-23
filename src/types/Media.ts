@@ -1,11 +1,13 @@
 import { ImageDataLike } from 'gatsby-plugin-image/dist/src/components/hooks';
 
+type MediaType = 'movie' | 'tv-series' | 'album' | 'video-game';
+
 interface Media {
   // site-specific data
   id: string;
   slug: string;
   thumbnail: ImageDataLike;
-  mediaType: string;
+  mediaType: MediaType;
   createdDate: string;
 
   // Basic Info
@@ -19,3 +21,4 @@ interface Media {
 }
 
 export default Media;
+export { MediaType}
