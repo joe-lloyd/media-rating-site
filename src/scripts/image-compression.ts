@@ -13,6 +13,9 @@ const imagesDir = path.resolve(__dirname, '../../src/content/images');
 // Supported image formats to convert
 const supportedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.tiff', '.avif'];
 
+// Maximum width for images
+const MAX_WIDTH = 1000;
+
 async function convertToWebp() {
   try {
     console.log(`Scanning directory: ${imagesDir}`);
@@ -23,6 +26,7 @@ async function convertToWebp() {
     let convertedCount = 0;
     let skippedCount = 0;
     let deletedCount = 0;
+    let resizedCount = 0;
 
     // Process each file
     for (const file of files) {
@@ -44,9 +48,27 @@ async function convertToWebp() {
         continue;
       }
 
-      // Convert to WebP
-      console.log(`Converting ${file} to WebP...`);
-      await sharp(filePath)
+      // Get image metadata
+      const metadata = await sharp(filePath).metadata();
+      const needsResize = metadata.width && metadata.width > MAX_WIDTH;
+
+      // Convert to WebP with resizing if needed
+      console.log(`Converting ${file} to WebP${needsResize ? ' with resize' : ''}...`);
+
+      let sharpInstance = sharp(filePath);
+
+      // Resize if width exceeds max width
+      if (needsResize) {
+        sharpInstance = sharpInstance.resize({
+          width: MAX_WIDTH,
+          fit: 'inside',
+          withoutEnlargement: true
+        });
+        resizedCount++;
+      }
+
+      // Convert to WebP and save
+      await sharpInstance
         .webp({ quality: 80 })
         .toFile(webpPath);
 
@@ -65,6 +87,7 @@ async function convertToWebp() {
     console.log(`
     Conversion completed:
     - Converted: ${convertedCount}
+    - Resized: ${resizedCount}
     - Deleted: ${deletedCount}
     - Skipped: ${skippedCount}
     `);

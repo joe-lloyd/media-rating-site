@@ -46,7 +46,7 @@ const VideoGamesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   const image = getImage(game.thumbnail);
 
   return (
-    <Layout title={game.title}>
+    <Layout title={game.title} image={game.thumbnail}>
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Main content */}
@@ -108,7 +108,7 @@ export const query = graphql`
                 thumbnail {
                     childImageSharp {
                         gatsbyImageData(
-                            width: 800
+                            width: 1000
                             placeholder: BLURRED
                             formats: [AUTO, WEBP, AVIF]
                         )

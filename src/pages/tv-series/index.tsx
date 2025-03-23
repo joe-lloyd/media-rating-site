@@ -18,7 +18,7 @@ interface Props {
 const TvSeriesOverviewPage: React.FC<Props> = ({ data }) => {
   const tvSeries: TvSeries[] = data.allMdx.nodes.map((node: { frontmatter : TvSeries}) => node.frontmatter);
   return (
-    <Layout title="TV Series">
+    <Layout title="TV Series" image={tvSeries[0].thumbnail}>
       <CardList>
         {tvSeries.map((series) => (<Card media={series} key={series.id} />))}
       </CardList>
@@ -28,7 +28,7 @@ const TvSeriesOverviewPage: React.FC<Props> = ({ data }) => {
 
 export const query = graphql`
     query TvSeriesQuery {
-        allMdx(filter: {frontmatter: {mediaType: {eq: "tv-series"}}}) {
+        allMdx(filter: {frontmatter: {mediaType: {eq: "tv-series"}}}, sort: {frontmatter: {createdDate: DESC}}) {
             nodes {
                 frontmatter {
                     id

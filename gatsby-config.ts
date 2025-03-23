@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from 'gatsby';
+import remarkGfm from 'remark-gfm';
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -18,7 +19,25 @@ const config: GatsbyConfig = {
         'icon': 'src/images/icon.png',
       },
     },
-    'gatsby-plugin-mdx',
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            },
+          },
+        ],
+        mdxOptions: {
+          remarkPlugins: [
+            // Add GitHub Flavored Markdown (GFM) support
+            remarkGfm,
+          ],
+        },
+      },
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-plugin-sharp`,

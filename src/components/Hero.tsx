@@ -1,27 +1,42 @@
 import React from 'react';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import { ImageDataLike } from 'gatsby-plugin-image/dist/src/components/hooks';
 
 interface HeroProps {
   title: string;
-  backgroundImage?: string;
+  mediaType?: 'movie' | 'tv-series' | 'album' | 'video-game';
+  image: ImageDataLike;
 }
 
 const Hero: React.FC<HeroProps> = ({
   title,
-  backgroundImage = '/images/video-game-banner.png',
+  mediaType = 'video-game',
+  image,
 }) => {
+  const gatsbyImage = getImage(image) as IGatsbyImageData;
 
   return (
-    <div className="relative h-96">
-      <div className="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
-      <div className="absolute inset-0">
-        <img
-          src={backgroundImage}
-          alt={title}
-          className="object-cover w-full h-full"
-        />
-      </div>
+    <div className="relative h-[500px] overflow-hidden">
+      {/* Main visible image with effect */}
+        <div className="absolute inset-0">
+            <div className="absolute inset-0 blur-xl">
+                <GatsbyImage
+                  image={gatsbyImage}
+                  alt={title}
+                  className="w-full h-full"
+                  objectFit="cover"
+                />
+            </div>
+
+        </div>
+
+      {/* Title */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-white p-6 bg-zinc-800 rounded-xl ">{title}</h1>
+        <div className="px-8 max-w-3xl text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
+            {title}
+          </h1>
+        </div>
       </div>
     </div>
   );

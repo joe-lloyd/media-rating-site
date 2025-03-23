@@ -19,7 +19,7 @@ const HomePage: React.FC<Props> = ({ data }) => {
   const allMedia: Media[] = data.allMdx.nodes.map((node: { frontmatter : Media}) => node.frontmatter);
 
   return (
-    <Layout title="Home">
+    <Layout title="Home" image={allMedia[0].thumbnail}>
       <CardList>
         {allMedia.map((media) => (<Card media={media} key={media.id} />))}
       </CardList>
@@ -29,7 +29,7 @@ const HomePage: React.FC<Props> = ({ data }) => {
 
 export const query = graphql`
     query AllMediaQuery {
-        allMdx {
+        allMdx(sort: {frontmatter: {createdDate: DESC}}) {
             nodes {
                 frontmatter {
                     id

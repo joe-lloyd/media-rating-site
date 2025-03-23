@@ -31,11 +31,9 @@ const Card = ({ media }: { media: Media }) => {
       <GatsbyImage image={thumb} alt={`${media.thumbnail} image`} className="object-contain h-72" />
       <div className="flex flex-1 content-between flex-col justify-between">
         <div className="p-5 pb-5">
-          <a href="#">
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              {media.title}
-            </h5>
-          </a>
+          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            {media.title}
+          </h5>
           <div className="flex items-center mt-2.5 mb-5">
             <RatingStars rating={media.personalRating} />
             <RatingTag rating={media.personalRating} />
@@ -46,7 +44,7 @@ const Card = ({ media }: { media: Media }) => {
         </div>
 
         <div
-          className="flex items-center justify-between p-5 bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 rounded-b-lg"
+          className="flex items-center justify-between px-5 py-2.5 bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 rounded-b-lg"
         >
           <div className="flex items-center">
             <p className="text-sm text-gray-600 dark:text-gray-300">

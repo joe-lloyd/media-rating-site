@@ -18,7 +18,7 @@ interface Props {
 const VideoGamesOverviewPage: React.FC<Props> = ({ data }) => {
   const videoGames: Media[] = data.allMdx.nodes.map((node: { frontmatter : Media}) => node.frontmatter);
   return (
-    <Layout title="Video Games">
+    <Layout title="Video Games" image={videoGames[0].thumbnail}>
       <CardList>
         {videoGames.map((videoGame) => (<Card media={videoGame} key={videoGame.id} />))}
       </CardList>
@@ -28,7 +28,7 @@ const VideoGamesOverviewPage: React.FC<Props> = ({ data }) => {
 
 export const query = graphql`
     query VideoGamesQuery {
-        allMdx(filter: {frontmatter: {mediaType: {eq: "video-game"}}}) {
+        allMdx(filter: {frontmatter: {mediaType: {eq: "video-game"}}}, sort: {frontmatter: {createdDate: DESC}}) {
             nodes {
                 frontmatter {
                     id

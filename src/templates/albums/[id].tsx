@@ -52,7 +52,7 @@ const AlbumDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   const image = getImage(album.coverUrl);
 
   return (
-    <Layout title={album.title}>
+    <Layout title={album.title} image={album.coverUrl}>
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Main content */}
@@ -111,7 +111,7 @@ export const query = graphql`
                 thumbnail {
                     childImageSharp {
                         gatsbyImageData(
-                            width: 800
+                            width: 1000
                             placeholder: BLURRED
                             formats: [AUTO, WEBP, AVIF]
                         )
@@ -124,7 +124,7 @@ export const query = graphql`
                 coverUrl {
                     childImageSharp {
                         gatsbyImageData(
-                            width: 800
+                            width: 1000
                             placeholder: BLURRED
                             formats: [AUTO, WEBP, AVIF]
                         )
