@@ -17,9 +17,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       synopsis: String
       releaseYear: Int
-      releaseDate: String
+      releaseDate: String!
       watchDate: String
-      dateFinished: String
+      dateFinished: String!
       lastListenedDate: String
       lastWatchedDate: String
       personalRating: Float
