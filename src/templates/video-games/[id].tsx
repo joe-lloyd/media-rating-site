@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import DetailLayout from '../../components/DetailLayout';
 import DetailSidebarBox from '../../components/DetailSidebarBox';
 import Tag from '../../components/Tag';
+import Ratings from '../../components/Ratings';
 import {
   FaCalendarAlt,
   FaClock,
@@ -67,36 +68,15 @@ const VideoGamesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   const sidebarContent = (
     <>
       <DetailSidebarBox title="Ratings">
-        <ul className="list-disc list-inside">
-          <li className="flex items-center">
-            <FaStar className="mr-2 text-yellow-300" />
-            <strong className="pr-1">Personal Rating:</strong> {game.personalRating}
-          </li>
-          {game.rating.steam !== '-1' && (
-            <li className="flex items-center">
-              <FaSteam className="mr-2 text-gray-700 dark:text-gray-200" />
-              <strong className="pr-1">Steam:</strong> {game.rating.steam}
-            </li>
-          )}
-          {game.rating.metacritic !== '-1' && (
-            <li className="flex items-center">
-              <FaNewspaper className="mr-2 text-gray-700 dark:text-gray-200" />
-              <strong className="pr-1">Metacritic:</strong> {game.rating.metacritic}
-            </li>
-          )}
-          {game.rating.ign !== '-1' && (
-            <li className="flex items-center">
-              <FaNewspaper className="mr-2 text-gray-700 dark:text-gray-200" />
-              <strong className="pr-1">IGN:</strong> {game.rating.ign}
-            </li>
-          )}
-          {game.rating.gamespot !== '-1' && (
-            <li className="flex items-center">
-              <FaNewspaper className="mr-2 text-gray-700 dark:text-gray-200" />
-              <strong className="pr-1">GameSpot:</strong> {game.rating.gamespot}
-            </li>
-          )}
-        </ul>
+        <Ratings 
+          personalRating={game.personalRating}
+          ratings={{
+            steam: game.rating.steam,
+            metacritic: game.rating.metacritic,
+            ign: game.rating.ign,
+            gamespot: game.rating.gamespot
+          }}
+        />
       </DetailSidebarBox>
 
       <DetailSidebarBox title="Details">

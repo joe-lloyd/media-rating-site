@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import DetailLayout from '../../components/DetailLayout';
 import DetailSidebarBox from '../../components/DetailSidebarBox';
+import Ratings from '../../components/Ratings';
 
 interface Props {
   data: {
@@ -53,11 +54,14 @@ const AlbumDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   const sidebarContent = (
     <>
       <DetailSidebarBox title="Ratings">
-        <ul className="list-disc list-inside">
-          <li><strong>Pitchfork:</strong> {album.rating.pitchfork}</li>
-          <li><strong>Metacritic:</strong> {album.rating.metacritic}</li>
-          <li><strong>Album of the Year:</strong> {album.rating.albumOfTheYear}</li>
-        </ul>
+        <Ratings 
+          personalRating={album.personalRating}
+          ratings={{
+            pitchfork: album.rating.pitchfork,
+            metacritic: album.rating.metacritic,
+            albumOfTheYear: album.rating.albumOfTheYear
+          }}
+        />
       </DetailSidebarBox>
 
       <DetailSidebarBox title="Details">

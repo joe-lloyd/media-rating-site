@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import DetailLayout from '../../components/DetailLayout';
 import DetailSidebarBox from '../../components/DetailSidebarBox';
+import Ratings from '../../components/Ratings';
 
 interface Props {
   data: {
@@ -59,11 +60,14 @@ const TvSeriesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   const sidebarContent = (
     <>
       <DetailSidebarBox title="Ratings">
-        <ul className="list-disc list-inside">
-          <li><strong>IMDB:</strong> {series.rating.imdb}</li>
-          <li><strong>Metacritic:</strong> {series.rating.metacritic}</li>
-          <li><strong>Rotten Tomatoes:</strong> {series.rating.rottenTomatoes}</li>
-        </ul>
+        <Ratings 
+          personalRating={series.personalRating}
+          ratings={{
+            imdb: series.rating.imdb,
+            metacritic: series.rating.metacritic,
+            rottenTomatoes: series.rating.rottenTomatoes
+          }}
+        />
       </DetailSidebarBox>
 
       <DetailSidebarBox title="Details">
@@ -150,3 +154,4 @@ export const query = graphql`
 `;
 
 export default TvSeriesDetailPage;
+
