@@ -68,13 +68,13 @@ const VideoGamesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   const sidebarContent = (
     <>
       <DetailSidebarBox title="Ratings">
-        <Ratings 
+        <Ratings
           personalRating={game.personalRating}
           ratings={{
             steam: game.rating.steam,
             metacritic: game.rating.metacritic,
             ign: game.rating.ign,
-            gamespot: game.rating.gamespot
+            gamespot: game.rating.gamespot,
           }}
         />
       </DetailSidebarBox>

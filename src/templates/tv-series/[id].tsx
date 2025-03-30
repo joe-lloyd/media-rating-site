@@ -3,6 +3,19 @@ import { graphql } from 'gatsby';
 import DetailLayout from '../../components/DetailLayout';
 import DetailSidebarBox from '../../components/DetailSidebarBox';
 import Ratings from '../../components/Ratings';
+import {
+  FaCalendarAlt,
+  FaFilm,
+  FaNetworkWired,
+  FaGlobe,
+  FaTheaterMasks,
+  FaTv,
+  FaEye,
+  FaRegListAlt,
+  FaRegPlayCircle,
+  FaRegClock,
+  FaCheckCircle,
+} from 'react-icons/fa';
 
 interface Props {
   data: {
@@ -49,10 +62,19 @@ const TvSeriesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   // Main info component for the main section
   const mainInfo = (
     <>
-      <p className="mt-2"><strong>Last Watched Date:</strong> {series.lastWatchedDate}</p>
-      <p className="mt-2"><strong>Progress:</strong> Season {series.currentSeason},
-        Episode {series.currentEpisode}</p>
-      <p className="mt-2"><strong>Status:</strong> {series.completionStatus}</p>
+      <p className="mt-2 flex items-center">
+        <FaEye className="mr-2 text-gray-500" />
+        <strong className="pr-1">Last Watched:</strong> {series.lastWatchedDate}
+      </p>
+      <p className="mt-2 flex items-center">
+        <FaRegPlayCircle className="mr-2 text-gray-500" />
+        <strong className="pr-1">Progress:</strong> Season {series.currentSeason},
+        Episode {series.currentEpisode}
+      </p>
+      <p className="mt-2 flex items-center">
+        <FaCheckCircle className="mr-2 text-gray-500" />
+        <strong className="pr-1">Status:</strong> {series.completionStatus}
+      </p>
     </>
   );
 
@@ -60,27 +82,56 @@ const TvSeriesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
   const sidebarContent = (
     <>
       <DetailSidebarBox title="Ratings">
-        <Ratings 
+        <Ratings
           personalRating={series.personalRating}
           ratings={{
             imdb: series.rating.imdb,
             metacritic: series.rating.metacritic,
-            rottenTomatoes: series.rating.rottenTomatoes
+            rottenTomatoes: series.rating.rottenTomatoes,
           }}
         />
       </DetailSidebarBox>
 
       <DetailSidebarBox title="Details">
-        <ul className="list-disc list-inside">
-          <li><strong>Creator:</strong> {series.creator}</li>
-          <li><strong>First Air Date:</strong> {series.firstAirDate}</li>
-          <li><strong>Last Air Date:</strong> {series.lastAirDate || 'Still Running'}</li>
-          <li><strong>Genres:</strong> {series.genres.join(', ')}</li>
-          <li><strong>Network:</strong> {series.network}</li>
-          <li><strong>Seasons:</strong> {series.seasons}</li>
-          <li><strong>Episodes:</strong> {series.episodes}</li>
-          <li><strong>Status:</strong> {series.status}</li>
-          <li><strong>Cast:</strong> {series.cast.join(', ')}</li>
+        <ul className="list-none space-y-2">
+          <li className="flex items-center">
+            <FaFilm className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">Creator:</strong> {series.creator}
+          </li>
+          <li className="flex items-center">
+            <FaCalendarAlt className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">First Air Date:</strong> {series.firstAirDate}
+          </li>
+          <li className="flex items-center">
+            <FaRegClock className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">Last Air Date:</strong> {series.lastAirDate || 'Still Running'}
+          </li>
+          <li className="flex items-center">
+            <FaGlobe className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">Genres:</strong> {series.genres.join(', ')}
+          </li>
+          <li className="flex items-center">
+            <FaNetworkWired className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">Network:</strong> {series.network}
+          </li>
+          <li className="flex items-center">
+            <FaRegListAlt className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">Seasons:</strong> {series.seasons}
+          </li>
+          <li className="flex items-center">
+            <FaTv className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">Episodes:</strong> {series.episodes}
+          </li>
+          <li className="flex items-center">
+            <FaCheckCircle className="mr-2 text-gray-700 dark:text-gray-200" />
+            <strong className="pr-1">Status:</strong> {series.status}
+          </li>
+          <li className="flex items-start">
+            <FaTheaterMasks className="mr-2 mt-1 text-gray-700 dark:text-gray-200" />
+            <div>
+              <strong className="pr-1">Cast:</strong> {series.cast.join(', ')}
+            </div>
+          </li>
         </ul>
       </DetailSidebarBox>
     </>
@@ -154,4 +205,3 @@ export const query = graphql`
 `;
 
 export default TvSeriesDetailPage;
-
