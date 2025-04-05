@@ -10,9 +10,6 @@ import {
   FaTrophy,
   FaCode,
   FaTag,
-  FaSteam,
-  FaNewspaper,
-  FaStar,
 } from 'react-icons/fa';
 
 interface Props {

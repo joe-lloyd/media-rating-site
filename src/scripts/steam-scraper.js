@@ -128,7 +128,7 @@ synopsis: "${synopsis}"
 isFavorite: false
 studio: ${studio}
 averageDuration: "Unknown"
-createdDate: ${formattedDate}
+createdDate: "${formattedDate}"
 rating:
   steam: ${steamScore}
   metacritic: -1

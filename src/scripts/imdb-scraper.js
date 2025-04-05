@@ -159,7 +159,7 @@ duration: "${duration}"
 language: "${language}"
 country: "${country}"
 cast: [${cast.map(c => `"${c}"`).join(', ')}]
-createdDate: ${new Date().toISOString().split('T')[0]}
+createdDate: "${new Date().toISOString().split('T')[0]}"
 rating:
   imdb: ${imdbRating}
   metacritic: -1
