@@ -78,7 +78,6 @@ exports.createSchemaCustomization = ({ actions }) => {
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  console.log("Creating pages")
   const { createPage } = actions
 
   const result = await graphql(`
@@ -108,8 +107,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const templatePath = path.resolve(`src/templates/${contentType}/[id].tsx`);
 
     const componentPath = resolve(`${templatePath}?__contentFilePath=${node.internal.contentFilePath}`)
-
-    console.log(componentPath)
 
     createPage({
       // As mentioned above you could also query something else like frontmatter.title above and use a helper function

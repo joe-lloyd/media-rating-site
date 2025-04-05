@@ -16,7 +16,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        'icon': 'src/images/icon.png',
+        'icon': `${__dirname}/src/images/icon.png`,
       },
     },
     {
@@ -61,35 +61,35 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         'name': 'images',
-        'path': './src/content/images/',
+        'path': `${__dirname}/src/content/images/`,
       },
       __key: 'images',
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {
         'name': 'movies',
-        'path': './src/content/movies',
+        'path': `${__dirname}/src/content/movies`,
       },
       __key: 'movies',
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {
         'name': 'video-games',
-        'path': './src/content/video-games',
+        'path': `${__dirname}/src/content/video-games`,
       },
       __key: 'video-games',
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {
         'name': 'albums',
-        'path': './src/content/albums',
+        'path': `${__dirname}/src/content/albums`,
       },
       __key: 'albums',
     }, {
       resolve: 'gatsby-source-filesystem',
       options: {
         'name': 'tv-series',
-        'path': './src/content/tv-series',
+        'path': `${__dirname}/src/content/tv-series`,
       },
       __key: 'tv-series',
     }],
