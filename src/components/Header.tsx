@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React, { useState } from 'react';
 import { FaHome, FaFilm, FaGamepad, FaMusic, FaTv } from 'react-icons/fa';
 
-const Index = () => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -105,4 +105,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Header;
