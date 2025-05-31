@@ -78,27 +78,43 @@ const VideoGamesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
 
       <DetailSidebarBox title="Details">
         <ul className="list-none space-y-2">
-          <li className="flex items-center">
-            <FaCalendarAlt className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Release Date:</strong> {game.releaseDate}
-          </li>
-          <li className="flex items-center">
-            <FaCode className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Developer:</strong> {game.studio}
-          </li>
-          <li className="flex items-center">
-            <FaClock className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Average Duration:</strong> {game.averageDuration}
-          </li>
-          <li className="flex items-center">
-            <FaTag className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Tags:</strong>
-            <div className="flex flex-wrap gap-1">
-              {game.tags.map((tag) => (
-                <Tag key={tag} name={tag} />
-              ))}
-            </div>
-          </li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaCalendarAlt className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Release Date:</strong> {game.releaseDate}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaCode className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Developer:</strong> {game.studio}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaClock className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Average Duration:</strong> {game.averageDuration}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaTag className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Tags:</strong>
+    <div className="flex flex-wrap gap-1">
+      {game.tags.map((tag) => (
+        <Tag key={tag} name={tag} />
+      ))}
+    </div>
+  </div>
+</li>
         </ul>
       </DetailSidebarBox>
     </>

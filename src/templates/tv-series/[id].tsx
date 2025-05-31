@@ -94,44 +94,78 @@ const TvSeriesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
 
       <DetailSidebarBox title="Details">
         <ul className="list-none space-y-2">
-          <li className="flex items-center">
-            <FaFilm className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Creator:</strong> {series.creator}
-          </li>
-          <li className="flex items-center">
-            <FaCalendarAlt className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">First Air Date:</strong> {series.firstAirDate}
-          </li>
-          <li className="flex items-center">
-            <FaRegClock className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Last Air Date:</strong> {series.lastAirDate || 'Still Running'}
-          </li>
-          <li className="flex items-center">
-            <FaGlobe className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Genres:</strong> {series.genres.join(', ')}
-          </li>
-          <li className="flex items-center">
-            <FaNetworkWired className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Network:</strong> {series.network}
-          </li>
-          <li className="flex items-center">
-            <FaRegListAlt className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Seasons:</strong> {series.seasons}
-          </li>
-          <li className="flex items-center">
-            <FaTv className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Episodes:</strong> {series.episodes}
-          </li>
-          <li className="flex items-center">
-            <FaCheckCircle className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Status:</strong> {series.status}
-          </li>
-          <li className="flex items-start">
-            <FaTheaterMasks className="mr-2 mt-1 text-gray-700 dark:text-gray-200" />
-            <div>
-              <strong className="pr-1">Cast:</strong> {series.cast.join(', ')}
-            </div>
-          </li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaFilm className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Creator:</strong> {series.creator}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaCalendarAlt className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">First Air Date:</strong> {series.firstAirDate}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaRegClock className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Last Air Date:</strong> {series.lastAirDate || 'Still Running'}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaGlobe className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Genres:</strong> {series.genres.join(', ')}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaNetworkWired className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Network:</strong> {series.network}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaRegListAlt className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Seasons:</strong> {series.seasons}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaTv className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Episodes:</strong> {series.episodes}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaCheckCircle className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Status:</strong> {series.status}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaTheaterMasks className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Cast:</strong> {series.cast.join(', ')}
+  </div>
+</li>
         </ul>
       </DetailSidebarBox>
     </>

@@ -75,33 +75,60 @@ const MoviesDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
       </DetailSidebarBox>
 
       <DetailSidebarBox title="Details">
+
         <ul className="list-none space-y-2">
-          <li className="flex items-center">
-            <FaCalendarAlt className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Release Date:</strong> {movie.releaseDate}
+          <li className="flex items-start gap-2.5">
+            <div className="w-4 h-4 mt-1 block">
+              <FaCalendarAlt className="text-gray-700 dark:text-gray-200" />
+            </div>
+            <div>
+              <strong className="pr-1">Release Date:</strong> {movie.releaseDate}
+            </div>
           </li>
-          <li className="flex items-center">
-            <FaFilm className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Director:</strong> {movie.director}
+          <li className="flex items-start gap-2.5">
+            <div className="w-4 h-4 mt-1 block">
+              <FaFilm className="text-gray-700 dark:text-gray-200" />
+            </div>
+            <div>
+              <strong className="pr-1">Director:</strong> {movie.director}
+            </div>
           </li>
-          <li className="flex items-center">
-            <FaClock className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Duration:</strong> {movie.duration}
+          <li className="flex items-start gap-2.5">
+            <div className="w-4 h-4 mt-1 block">
+              <FaClock className="text-gray-700 dark:text-gray-200" />
+            </div>
+            <div>
+              <strong className="pr-1">Duration:</strong> {movie.duration}
+            </div>
           </li>
-          <li className="flex items-center">
-            <FaGlobe className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Genres:</strong> {movie.genres.join(', ')}
+          <li className="flex items-start gap-2.5">
+            <div className="w-4 h-4 mt-1 block">
+              <FaGlobe className="text-gray-700 dark:text-gray-200" />
+            </div>
+            <div>
+              <strong className="pr-1">Genres:</strong> {movie.genres.join(', ')}
+            </div>
           </li>
-          <li className="flex items-center">
-            <FaLanguage className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Language:</strong> {movie.language}
+          <li className="flex items-start gap-2.5">
+            <div className="w-4 h-4 mt-1 block">
+              <FaLanguage className="text-gray-700 dark:text-gray-200" />
+            </div>
+            <div>
+              <strong className="pr-1">Language:</strong> {movie.language}
+            </div>
           </li>
-          <li className="flex items-center">
-            <FaMapMarker className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Country:</strong> {movie.country}
+          <li className="flex items-start gap-2.5">
+            <div className="w-4 h-4 mt-1 block">
+              <FaMapMarker className="text-gray-700 dark:text-gray-200" />
+            </div>
+            <div>
+              <strong className="pr-1">Country:</strong> {movie.country}
+            </div>
           </li>
-          <li className="flex items-start">
-            <FaTheaterMasks className="mr-2 mt-1 text-gray-700 dark:text-gray-200" />
+          <li className="flex items-start gap-2.5">
+            <div className="w-4 h-4 mt-1 block">
+              <FaTheaterMasks className="text-gray-700 dark:text-gray-200" />
+            </div>
             <div>
               <strong className="pr-1">Cast:</strong> {movie.cast.join(', ')}
             </div>

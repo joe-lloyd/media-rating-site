@@ -85,26 +85,46 @@ const AlbumDetailPage: React.FC<React.PropsWithChildren<Props>> = ({
 
       <DetailSidebarBox title="Details">
         <ul className="list-none space-y-2">
-          <li className="flex items-center">
-            <FaCalendarAlt className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Release Year:</strong> {album.releaseYear}
-          </li>
-          <li className="flex items-center">
-            <FaTag className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Genres:</strong> {album.genres.join(', ')}
-          </li>
-          <li className="flex items-center">
-            <FaCompactDisc className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Number of Tracks:</strong> {album.tracks}
-          </li>
-          <li className="flex items-center">
-            <FaRecordVinyl className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Label:</strong> {album.label}
-          </li>
-          <li className="flex items-center">
-            <FaClock className="mr-2 text-gray-700 dark:text-gray-200" />
-            <strong className="pr-1">Duration:</strong> {album.duration} minutes
-          </li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaCalendarAlt className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Release Year:</strong> {album.releaseYear}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaTag className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Genres:</strong> {album.genres.join(', ')}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaCompactDisc className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Number of Tracks:</strong> {album.tracks}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaRecordVinyl className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Label:</strong> {album.label}
+  </div>
+</li>
+          <li className="flex items-start gap-2.5">
+  <div className="w-4 h-4 mt-1 block">
+    <FaClock className="text-gray-700 dark:text-gray-200" />
+  </div>
+  <div>
+    <strong className="pr-1">Duration:</strong> {album.duration} minutes
+  </div>
+</li>
         </ul>
       </DetailSidebarBox>
     </>

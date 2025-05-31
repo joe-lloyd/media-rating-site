@@ -2,9 +2,15 @@ import React from 'react';
 
 const RatingStars = ({ rating }: { rating: number }) => {
   const totalStars = 5;
-  const filledStars = Math.floor(rating / 2);
-  const halfStar = rating % 2 >= 1 ? 1 : 0;
-  const emptyStars = totalStars - filledStars - halfStar;
+  // Ensure rating is a valid number between 0 and 10
+  const safeRating = typeof rating === 'number' && !isNaN(rating) && rating >= 0 ? rating : 0;
+  let filledStars = Math.floor(safeRating / 2);
+  let halfStar = safeRating % 2 >= 1 ? 1 : 0;
+  let emptyStars = totalStars - filledStars - halfStar;
+  // Clamp to valid values
+  filledStars = Math.max(0, filledStars);
+  halfStar = Math.max(0, halfStar);
+  emptyStars = Math.max(0, emptyStars);
 
   return (
     <div className="flex items-center space-x-1 rtl:space-x-reverse">
