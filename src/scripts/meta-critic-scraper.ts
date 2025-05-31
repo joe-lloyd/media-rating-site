@@ -1,135 +1,114 @@
-const cheerio = require('cheerio');
-const axios = require('axios');
+import * as cheerio from 'cheerio';
+import { media } from './data-to-scrape';
+import { CheerioAPI } from 'cheerio';
 
-/**
- * Fetches HTML content and creates a Cheerio instance
- * @param {string} url - URL to fetch
- * @returns {Promise<CheerioAPI>} - Cheerio instance
- */
-async function fetchAndLoadCheerio(url) {
+async function fetchAndLoadCheerio(url: string): Promise<CheerioAPI> {
   try {
-    const response = await axios.get(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
-      },
-    });
-    return cheerio.load(response.data);
-  }
-  catch (error) {
-    console.error(`Error fetching URL ${url}:`, error.message);
+    return cheerio.fromURL(url);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.error(`Error fetching URL ${url}:`, error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     throw error;
   }
 }
 
-/**
- * Get game title
- * @param {CheerioAPI} $ - Cheerio instance
- * @returns {string} - Game title
- */
-function getTitle($) {
+function getTitle($: CheerioAPI): string {
   try {
     return $('.c-productHero_title').text().trim();
-  }
-  catch (error) {
-    console.error('Error extracting title:', error.message);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.error('Error extracting title:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     return '';
   }
 }
 
-/**
- * Get meta score
- * @param {CheerioAPI} $ - Cheerio instance
- * @returns {string} - Meta score
- */
-function getMetaScore($) {
+function getMetaScore($: CheerioAPI): string {
   try {
     return $('.c-productScoreInfo_scoreNumber').first().text().trim();
-  }
-  catch (error) {
-    console.error('Error extracting meta score:', error.message);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.error('Error extracting meta score:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     return '';
   }
 }
 
-/**
- * Get release date
- * @param {CheerioAPI} $ - Cheerio instance
- * @returns {string} - Release date
- */
-function getReleaseDate($) {
+function getReleaseDate($: CheerioAPI): string {
   try {
     // Find the label first, then get the adjacent text
     const releaseDateLabel = $('span').filter(function() {
       return $(this).text().trim() === 'Released On:';
     });
     return releaseDateLabel.next().text().trim();
-  }
-  catch (error) {
-    console.error('Error extracting release date:', error.message);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.error('Error extracting release date:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     return '';
   }
 }
 
-/**
- * Get developer
- * @param {CheerioAPI} $ - Cheerio instance
- * @returns {string} - Developer
- */
-function getDeveloper($) {
+function getDeveloper($: CheerioAPI): string {
   try {
     return $('.c-productDetails_item.developer .c-productDetails_developersContent')
       .text()
       .trim();
-  }
-  catch (error) {
-    console.error('Error extracting developer:', error.message);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.error('Error extracting developer:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     return '';
   }
 }
 
-/**
- * Get tags
- * @param {CheerioAPI} $ - Cheerio instance
- * @returns {string[]} - Genres array
- */
-function getTags($) {
+function getTags($: CheerioAPI): string[] {
   try {
-    const genres = [];
+    const genres: string[] = [];
     $('.c-productDetails_item.genres .c-productDetails_genresList a').each((i, el) => {
       genres.push($(el).text().trim());
     });
     return genres;
-  }
-  catch (error) {
-    console.error('Error extracting genres:', error.message);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.error('Error extracting genres:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     return [];
+
   }
 }
 
-/**
- * Get summary
- * @param {CheerioAPI} $ - Cheerio instance
- * @returns {string} - Summary
- */
-function getSummary($) {
+function getSummary($: CheerioAPI): string {
   try {
     return $('.c-productSummary_description').text().trim();
-  }
-  catch (error) {
-    console.error('Error extracting summary:', error.message);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.error('Error extracting summary:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     return '';
   }
 }
 
-/**
- * Main function to get game details by slug
- * @param {string} slug - Game slug
- * @param personalRating
- * @param timePlayed
- * @param isFavorite
- * @returns {Promise<object>} - Game details object
- */
-async function getGameDetailsBySlug({ slug, personalRating, timePlayed, isFavorite }) {
+
+async function getGameDetailsBySlug({
+  slug,
+  personalRating,
+}: media): Promise<object> {
   const baseUrl = 'https://www.metacritic.com/game/';
   const url = `${baseUrl}${slug}`;
 
@@ -141,17 +120,17 @@ async function getGameDetailsBySlug({ slug, personalRating, timePlayed, isFavori
     return {
       id: slug,
       slug: slug,
-      mediaType: "video-game",
+      mediaType: 'video-game',
       title: getTitle($),
-      author: "Joe Lloyd",
+      author: 'Joe Lloyd',
       releaseDate: getReleaseDate($),
       dateFinished: dateNow.getDate(),
       personalRating: personalRating,
       thumbnail: `../images/${slug}.webp`,
       tags: getTags($),
-      timePlayed: timePlayed,
+      timePlayed: "",
       synopsis: getSummary($),
-      isFavorite,
+      isFavorite: "",
       studio: getDeveloper($),
       createdDate: dateNow.getDate(),
       rating: {
@@ -159,15 +138,17 @@ async function getGameDetailsBySlug({ slug, personalRating, timePlayed, isFavori
         metacritic: getMetaScore($),
         ign: -1,
         gamespot: -1,
-      }
+      },
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(`Error fetching game details for ${slug}:`, error.message);
+    } else {
+      console.error('Unexpected error:', error);
     }
-  }
-  catch (error) {
-    console.error(`Error fetching game details for ${slug}:`, error.message);
     throw error;
   }
 }
 
-module.exports = {
-  getGameDetailsBySlug,
-};
+export default getGameDetailsBySlug;
+

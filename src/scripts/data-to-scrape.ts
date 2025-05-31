@@ -1,4 +1,18 @@
-const dataToScrape = {
+§export type media = {
+  title: string;
+  slug: string;
+  personalRating: number;
+  description: string;
+}
+
+export type dataToScrape = {
+  movies: media[];
+  series: media[];
+  albums: media[];
+  games: media[];
+}
+
+const dataToScrape: dataToScrape = {
   movies: [],
   series: [],
   albums: [],
@@ -16,4 +30,4 @@ const dataToScrape = {
   ],
 }
 
-module.exports = dataToScrape;
+export default dataToScrape;

@@ -1,15 +1,16 @@
-// Example of how to use the MetaCriticScraper
-const MetaCriticScraper = require('./meta-critic-scraper');
+import data from './data-to-scrape';
+import getGameDetailsBySlug from './meta-critic-scraper';
 
 async function example() {
-  const scraper = new MetaCriticScraper();
-
   try {
-    // Get details for a specific game using its slug
-    const gameDetails = await scraper.getGameDetailsBySlug('resident-evil-4-2005');
-    console.log(gameDetails);
+    const allGameData = await Promise.all(data.games.map((game) => getGameDetailsBySlug(game)));
+    console.log(allGameData);
   } catch (error) {
-    console.error('Error:', error.message);
+    if(error instanceof Error) {
+      console.error('Error:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
   }
 }
 
