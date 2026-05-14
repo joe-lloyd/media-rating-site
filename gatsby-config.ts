@@ -92,6 +92,13 @@ const config: GatsbyConfig = {
         'path': `${__dirname}/src/content/tv-series`,
       },
       __key: 'tv-series',
+    }, {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        'name': 'books',
+        'path': `${__dirname}/src/content/books`,
+      },
+      __key: 'books',
     }],
 };
 

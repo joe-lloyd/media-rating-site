@@ -60,6 +60,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       averageDuration: String
       tags: [String]
       
+      # Book specific fields
+      pages: Int
+      publisher: String
+      
       # Rating structures for different media types
       rating: FrontmatterRating
     }
@@ -73,6 +77,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       steam: String
       ign: String
       gamespot: String
+      goodreads: String
+      amazon: String
     }
   `)
 }
@@ -87,6 +93,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                   id
                   frontmatter {
                       slug
+                      mediaType
                   }
                   internal {
                       contentFilePath
@@ -103,15 +110,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const posts = result.data.allMdx.nodes
 
   posts.forEach(node => {
-    const [_, contentType, ...__] = node.internal.contentFilePath.split('/').reverse()
-    const templatePath = path.resolve(`src/templates/${contentType}/[id].tsx`);
+    const typeFolderMap = {
+      'movie': 'movies',
+      'tv-series': 'tv-series',
+      'album': 'albums',
+      'video-game': 'video-games',
+      'book': 'books'
+    };
+    
+    // Fallback to path parsing if mediaType is not found
+    let folder = typeFolderMap[node.frontmatter.mediaType];
+    if (!folder) {
+      const parts = node.internal.contentFilePath.split('/');
+      folder = parts[parts.length - 2];
+    }
 
+    const templatePath = path.resolve(`src/templates/${folder}/[id].tsx`);
     const componentPath = resolve(`${templatePath}?__contentFilePath=${node.internal.contentFilePath}`)
 
     createPage({
       // As mentioned above you could also query something else like frontmatter.title above and use a helper function
       // like slugify to create a slug
-      path: `${contentType}/${node.frontmatter.slug}`,
+      path: `${folder}/${node.frontmatter.slug}`,
       // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
       component: componentPath,
       // You can use the values in this context in

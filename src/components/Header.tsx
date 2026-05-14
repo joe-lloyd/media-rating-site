@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
 import React, { useState } from 'react';
-import { FaHome, FaFilm, FaGamepad, FaMusic, FaTv } from 'react-icons/fa';
+import { FaHome, FaFilm, FaGamepad, FaMusic, FaTv, FaBook } from 'react-icons/fa';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +35,10 @@ const Header = () => {
               to="/tv-series"
               className="flex items-center text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
             ><FaTv className="mr-2" /> Series</Link>
+            <Link
+              to="/books"
+              className="flex items-center text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+            ><FaBook className="mr-2" /> Books</Link>
           </div>
           <div className="flex md:hidden">
             <button
@@ -99,6 +103,10 @@ const Header = () => {
             to="/albums"
             className="flex items-center text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium"
           ><FaMusic className="mr-2" /> Albums</Link>
+          <Link
+            to="/books"
+            className="flex items-center text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 px-3 py-2 rounded-md text-base font-medium"
+          ><FaBook className="mr-2" /> Books</Link>
         </div>
       </div>
     </header>

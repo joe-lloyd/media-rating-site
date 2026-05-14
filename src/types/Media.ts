@@ -1,6 +1,6 @@
 import { ImageDataLike } from 'gatsby-plugin-image/dist/src/components/hooks';
 
-type MediaType = 'movie' | 'tv-series' | 'album' | 'video-game';
+type MediaType = 'movie' | 'tv-series' | 'album' | 'video-game' | 'book';
 
 interface Media {
   // site-specific data
