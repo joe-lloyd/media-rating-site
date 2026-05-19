@@ -7,7 +7,7 @@ import { MediaType } from '../types/Media';
 
 const Layout: React.FC<{ children: ReactNode, title: string, image: ImageDataLike, mediaType: MediaType }> = ({ children, title, image, mediaType }) => {
   return (
-    <div className="bg-neutral-200 dark:bg-neutral-800 w-full min-h-screen text-slate-950 dark:text-slate-50">
+    <div className="bg-gray-900 w-full min-h-screen text-gray-50">
       <Header />
       <Hero title={title} image={image} mediaType={mediaType} />
       <MdxComponentsWrapper>

@@ -48,10 +48,10 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
               />
             )}
             <h1 className="text-3xl font-bold mt-6">{title}</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-3">{synopsis}</p>
+            <p className="text-gray-300 mt-3">{synopsis}</p>
             <div className="flex items-center mt-4">
               <RatingStars rating={personalRating} />
-              <span className="ml-2 text-gray-600 dark:text-gray-300">({personalRating})</span>
+              <span className="ml-2 text-gray-300">({personalRating})</span>
             </div>
 
             {mainInfo && <div className="mt-4">{mainInfo}</div>}
@@ -70,7 +70,7 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({
                 <div className="mt-6">
                   <a
                     href={backLink.url}
-                    className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
+                    className="text-amber-400 hover:underline flex items-center"
                   >
                     <FaArrowLeft className="mr-2" />
                     {backLink.text}

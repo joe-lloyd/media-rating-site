@@ -20,7 +20,7 @@ const Card = ({ media }: { media: Media }) => {
   return (
     <Link
       to={`/${mediaPath}/${media.slug}`}
-      className="flex flex-col w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mx-auto"
+      className="flex flex-col w-full max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow-sm mx-auto hover:border-amber-400/50 transition-colors"
     >
       <GatsbyImage
         image={thumb}
@@ -29,7 +29,7 @@ const Card = ({ media }: { media: Media }) => {
       />
       <div className="flex flex-1 content-between flex-col justify-between">
         <div className="p-5 pb-5">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="text-xl font-semibold tracking-tight text-gray-50">
             {media.title}
           </h5>
           <div className="flex items-center mt-2.5 mb-5">
@@ -41,16 +41,16 @@ const Card = ({ media }: { media: Media }) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between px-5 py-2.5 bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 rounded-b-lg">
+        <div className="flex items-center justify-between px-5 py-2.5 bg-gray-900 border-t border-gray-700 rounded-b-lg">
           <div className="flex items-center">
-            <FaCalendarAlt className="text-gray-500 mr-2" />
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <FaCalendarAlt className="text-gray-400 mr-2" />
+            <p className="text-sm text-gray-400">
               {media.createdDate}
             </p>
           </div>
           <div className="flex items-center">
-            <FaTag className="text-gray-500 mr-2" />
-            <span className="text-sm text-gray-600 dark:text-gray-300 capitalize">
+            <FaTag className="text-gray-400 mr-2" />
+            <span className="text-sm text-gray-400 capitalize">
               {media.mediaType}
             </span>
           </div>

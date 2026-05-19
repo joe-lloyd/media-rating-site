@@ -6,7 +6,7 @@ interface TagProps {
 
 const Tag: React.FC<TagProps> = ({ name }) => {
   return (
-    <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+    <span className="bg-gray-700 text-gray-200 text-xs font-semibold px-2.5 py-0.5 rounded border border-gray-600">
       {name}
     </span>
   );
