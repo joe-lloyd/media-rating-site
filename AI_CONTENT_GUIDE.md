@@ -2,24 +2,27 @@
 
 This guide documents the process for adding new media entries to the site, specifically focusing on Video Games.
 
+The review text itself follows the review-writing skill in `.claude/skills/review-writing/SKILL.md`. Read it before you write or change any review body.
+
 ## Process for Adding New Entries
 
 1.  **Gather Metadata**: Collect all necessary information about the media (Developer, Publisher, Release Date, Genres, Platforms, etc.).
 2.  **Obtain Assets**:
     *   Find a high-quality box art/poster image.
     *   Convert it to `.webp` format.
-    *   Place it in `src/images/`.
+    *   Place it in `src/content/images/`.
     *   Naming convention: `kebab-case-title.webp` (e.g., `stellar-blade.webp`).
 3.  **Create MDX File**:
     *   Create a new `.mdx` file in `src/content/<media-type>/`.
     *   Naming convention: `kebab-case-title.mdx`.
     *   Populate the frontmatter according to the TypeScript interfaces below.
-4.  **Validate**: Ensure all required fields are present and types are correct.
+4.  **Write the review**: Write the body from Joe's notes by following `.claude/skills/review-writing/SKILL.md`. Joe's notes are the only source of opinions. If he hasn't given any, leave the body empty and ask him.
+5.  **Validate**: Ensure all required fields are present and types are correct.
 
 ## File Structure
 
 - **Content**: `src/content/video-games/`, `src/content/movies/`, etc.
-- **Images**: `src/images/`
+- **Images**: `src/content/images/`
 - **Types**: `src/types/`
 
 ## TypeScript Interfaces
